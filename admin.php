@@ -5,7 +5,8 @@ include "koneksi.php";
 
 //check jika belum ada user yang login arahkan ke halaman login
 if (!isset($_SESSION['username'])) { 
-	header("location:login.php"); 
+	header("location:login.php");
+    exit(); // Ensure no further code is executed after the redirect
 } 
 ?>
 
@@ -67,12 +68,19 @@ if (!isset($_SESSION['username'])) {
             <li class="nav-item">
                 <a class="nav-link" href="admin.php?page=article">Article</a>
             </li> 
+            <li class="nav-item">
+                <a class="nav-link" href="admin.php?page=gallery">Gallery</a>
+            </li> 
+            <li class="nav-item">  
+                    <a class="nav-link" href="http://queenajournal.free.nf">Homepage</a>   
+                </li>  
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?= $_SESSION['username']?>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li> 
+            <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?= $_SESSION['username']?>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="admin.php?page=profile">Profile <?=$_SESSION['username']?> </a></li>
+                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>  
                 </ul>
             </li> 
         </ul>
@@ -81,7 +89,7 @@ if (!isset($_SESSION['username'])) {
     </nav>
     <!-- nav end -->
     <!-- content begin -->
-<section id="content" class="p-5">
+    <section id="content" class="p-5">
     <div class="container">
         <?php
         if(isset($_GET['page'])){
@@ -98,21 +106,21 @@ if (!isset($_SESSION['username'])) {
         ?>
     </div>
 </section>
-<!-- content end -->
+    <!-- content end -->
     <!-- footer begin -->
     <footer class="text-center p-5 bg-danger-subtle">
     <div>
         <a href="https://www.instagram.com/udinusofficial"
-        ><i class="bi bi-instagram h2 p-2 text-dark"></i
+          ><i class="bi bi-instagram h2 p-2"></i
         ></a>
         <a href="https://twitter.com/udinusofficial"
-        ><i class="bi bi-twitter h2 p-2 text-dark"></i
+          ><i class="bi bi-twitter h2 p-2"></i
         ></a>
-        <a href="https://wa.me/+62812685577"
-        ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
+        <a href="https://wa.me/+6285290173763"
+          ><i class="bi bi-whatsapp h2 p-2"></i
         ></a>
     </div>
-    <div>Aprilyani Nur Safitri &copy; 2023</div>
+    <div>Kholifah Rana Almadina &copy; 2024</div>
     </footer>
     <!-- footer end -->
     <script
@@ -122,4 +130,3 @@ if (!isset($_SESSION['username'])) {
     ></script>
 </body>
 </html> 
-
