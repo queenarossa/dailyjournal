@@ -23,7 +23,7 @@ include "koneksi.php";
     <!-- nav begin -->
     <nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top">
       <div class="container">
-        <a class="navbar-brand" href="#">My Daily Journal</a>
+        <a class="navbar-brand" href="#">My Daily Journal!</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -80,7 +80,7 @@ include "koneksi.php";
     <section id="hero" class="text-center p-5 bg-danger-subtle text-sm-start">
       <div class="container">
         <div class="d-sm-flex flex-sm-row-reverse align-items-center">
-          <img src="https://cdn.marvel.com/u/prod/marvel/images/OpenGraph-TW-1200x630.jpg" class="img-fluid" width="300" />
+          <img src="img/cover.jpg" class="img-fluid" width="300" />
           <div>
             <h1 class="fw-bold display-4">
               All About Marvel Universe, Is In Here!
@@ -131,46 +131,37 @@ include "koneksi.php";
   </div>
 </section>
 <!-- article end -->
-    <!-- gallery begin -->
-    <section id="gallery" class="text-center p-5 bg-danger-subtle">
-      <div class="container">
-        <h1 class="fw-bold display-4 pb-3">gallery</h1>
-        <div id="carouselExample" class="carousel slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://fahum.umsu.ac.id/blog/wp-content/uploads/2024/07/sinopsis-film-deadpool-3-deadpool-wolverine.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="https://img.tek.id/img/content/2023/11/09/63529/the-marvels-resmi-tayang-di-bioskop-kapan-rilis-di-disney-kcJGAsp7GC.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="https://www.ruparupa.com/blog/wp-content/uploads/2023/05/Kanala-270-Ml-Dispenser-Sabun-Cair-1-696x522.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="https://akcdn.detik.net.id/visual/2022/10/25/ant-man-and-the-wasp-quantumania-2023-1_169.png?w=650" class="d-block w-100" alt="..." />
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-    </section>
+     <!-- gallery begin -->
+     <section id="gallery" class="text-center p-5">      
+        <div class="container">      
+            <h1 class="fw-bold display-4 pb-3">Gallery</h1>      
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">  
+                <div class="carousel-inner">  
+                    <?php    
+                    $sql = "SELECT * FROM gallery ORDER BY tanggal DESC";    
+                    $hasil = $conn->query($sql);    
+                    $active = true; // To set the first item as active  
+                    while ($row = $hasil->fetch_assoc()) {    
+                    ?>    
+                        <div class="carousel-item <?= $active ? 'active' : '' ?>">    
+                            <img src="img/<?= htmlspecialchars($row["gambar"]) ?>" class="d-block w-100" alt="Gallery Image"/>  
+                        </div>    
+                    <?php   
+                        $active = false; // Set active to false after the first item  
+                    }   
+                    ?>    
+                </div>  
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">  
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>  
+                    <span class="visually-hidden">Previous</span>  
+                </button>  
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">  
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>  
+                    <span class="visually-hidden">Next</span>  
+                </button>  
+            </div>  
+        </div>      
+    </section> 
     <!-- gallery end -->
     <!-- schedule begin -->
     <section id="schedule" class="text-center p-5">
@@ -182,10 +173,7 @@ include "koneksi.php";
               <div class="card-header bg-danger text-white">SENIN</div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Etika Profesi<br />16.20-18.00 | H.4.4
-                </li>
-                <li class="list-group-item">
-                  Sistem Operasi<br />18.30-21.00 | H.4.8
+                  Technopreneurship<br />12.30-14.10 | Kulino
                 </li>
               </ul>
             </div>
@@ -195,13 +183,10 @@ include "koneksi.php";
               <div class="card-header bg-danger text-white">SELASA</div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Pendidikan Kewarganegaraan<br />12.30-13.10 | Kulino
+                  Sistem Operasi<br />07.00-09.30 | H.4.10
                 </li>
                 <li class="list-group-item">
-                  Probabilitas dan Statistik<br />15.30-18.00 | H.4.9
-                </li>
-                <li class="list-group-item">
-                  Kecerdasan Buatan<br />18.30-21.00 | H.4.11
+                  Pendidikan Kewarganegaraan<br />12.30-14.10 | Aula H7
                 </li>
               </ul>
             </div>
@@ -211,7 +196,10 @@ include "koneksi.php";
               <div class="card-header bg-danger text-white">RABU</div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Manajemen Proyek Teknologi Informasi<br />15.30-18.00 | H.4.6
+                  Logika Informatika<br />07.00-09.30 | H.4.7
+                </li>
+                <li class="list-group-item">
+                  Basis Data<br />10.20-12.00 | D.3.M
                 </li>
               </ul>
             </div>
@@ -221,13 +209,10 @@ include "koneksi.php";
               <div class="card-header bg-danger text-white">KAMIS</div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Bahasa Indonesia<br />12.30-14.10 | Kulino
+                  Pemrograman Berbasis Web<br />08.40-10.20 | D.2.J
                 </li>
                 <li class="list-group-item">
-                  Pendidikan Agama Islam<br />16.20-18.00 | Kulino
-                </li>
-                <li class="list-group-item">
-                  Penambangan Data<br />18.30-21.00 | H.4.9
+                  Rekayasa Perangkat Lunak<br />12.30-15.00 | H.5.4
                 </li>
               </ul>
             </div>
@@ -237,7 +222,10 @@ include "koneksi.php";
               <div class="card-header bg-danger text-white">JUMAT</div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Pemrograman Web Lanjut<br />10.20-12.00 | D.2.K
+                  Probabilitas dan Statistik<br />12.30-15.00 | H.4.8
+                </li>
+                <li class="list-group-item">
+                  Basis Data<br />10.20-12.00 | H.5.3
                 </li>
               </ul>
             </div>
@@ -260,7 +248,7 @@ include "koneksi.php";
         <div class="d-sm-flex align-items-center justify-content-center">
           <div class="p-3">
             <img
-              src="https://i.pinimg.com/236x/06/04/7f/06047fdb65268b68a1f11a18d37634cc.jpg"
+              src="img/fotoku.jpg"
               class="rounded-circle border shadow"
               width="300"
             />
@@ -280,13 +268,13 @@ include "koneksi.php";
     <!-- footer begin -->
     <footer id="footer" class="text-center p-5">
       <div>
-        <a href="https://www.instagram.com/udinusofficial"
+        <a href="https://www.instagram.com/queenarossa"
           ><i class="bi bi-instagram h2 p-2"></i
         ></a>
         <a href="https://twitter.com/udinusofficial"
           ><i class="bi bi-twitter h2 p-2"></i
         ></a>
-        <a href="https://wa.me/+62812685577"
+        <a href="https://wa.me/+6285290173763"
           ><i class="bi bi-whatsapp h2 p-2"></i
         ></a>
       </div>
